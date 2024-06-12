@@ -2,8 +2,7 @@ Flask
 Flask-SocketIO
 pyrebase4
 numpy
-onnxruntime
-tf2onnx
 gunicorn==20.1.0
+tflite_runtime
 
 
