@@ -1,5 +1,6 @@
 import threading
 import time
+import os
 import pyrebase
 import numpy as np
 import onnxruntime as ort
@@ -7,7 +8,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = os.environ.get('SECRET')
 socketio = SocketIO(app)
 
 firebaseConfig = {
