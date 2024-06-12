@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time SOC Prediction</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <title>Prediction SOC</title>
 </head>
 <body>
-    <h1>Real-Time SOC Prediction</h1>
-    <div>
-        <h2>Prediction SOC: <span id="soc-value">Loading...</span></h2>
-    </div>
+    <h1>Prédiction SOC</h1>
+    <div id="prediction-value">La valeur prédite sera affichée ici</div>
+
+    <!-- Importer Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script>
-        var socket = io();
+        // Connexion au serveur SocketIO
+        const socket = io();
+
+        // Écouter l'événement 'prediction' et mettre à jour la valeur prédite
         socket.on('prediction', function(data) {
-            document.getElementById('soc-value').innerText = data.SOC;
+            const socValue = data.SOC;
+            document.getElementById('prediction-value').innerText = `La valeur prédite SOC est : ${socValue}`;
         });
     </script>
 </body>
 </html>
+
+
