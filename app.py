@@ -9,9 +9,7 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET')
-app.config['databaseURL]= os.environ.get('')
 socketio = SocketIO(app)
-
 firebaseConfig = {
     "apiKey": "AIzaSyBjDArp_CvaEjvELFQWd_S1N7dSJW6Kz0o",
     "authDomain": "data-5647b.firebaseapp.com",
