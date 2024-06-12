@@ -3,6 +3,6 @@ Flask-SocketIO
 pyrebase4
 numpy
 gunicorn==20.1.0
-tflite_runtime
+tflite_runtime==2.14.0
 
 
