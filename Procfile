@@ -1,2 +1,2 @@
-web: python3 ./app.py
+web: gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker app:app
 
