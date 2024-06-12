@@ -1,15 +1,18 @@
+import numpy as np
+import tflite_runtime.interpreter as tflite
+import pyrebase
 import threading
 import time
-import os
 import pyrebase
 import numpy as np
-import onnxruntime as ort
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET')
 socketio = SocketIO(app)
+
 firebaseConfig = {
     "apiKey": "AIzaSyBjDArp_CvaEjvELFQWd_S1N7dSJW6Kz0o",
     "authDomain": "data-5647b.firebaseapp.com",
@@ -24,8 +27,11 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
-# Load the ONNX model
-ort_session = ort.InferenceSession("model_GRU_3.onnx")
+# Charger le modèle TensorFlow Lite
+interpreter = tflite.Interpreter(model_path="model_GRU_3.tflite")
+interpreter.allocate_tensors()
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 
 def load_data_and_predict():
     while True:
@@ -37,12 +43,16 @@ def load_data_and_predict():
                 temperature = data.get('Temperature', 0)
                 input_data = np.array([[courant, tension, temperature]], dtype=np.float32)
                 
-                # Run the ONNX model
-                ort_inputs = {ort_session.get_inputs()[0].name: input_data}
-                ort_outs = ort_session.run(None, ort_inputs)
-                soc = ort_outs[0][0]
+                # Définir les données d'entrée du modèle
+                interpreter.set_tensor(input_details[0]['index'], input_data)
                 
-                # Emit the SocketIO event with the prediction
+                # Effectuer une inférence
+                interpreter.invoke()
+                
+                # Récupérer la prédiction
+                soc = interpreter.get_tensor(output_details[0]['index'])[0]
+                
+                # Émettre l'événement SocketIO avec la prédiction
                 socketio.emit('prediction', {'SOC': soc.tolist()})
             else:
                 print("Les données récupérées ne sont pas au format attendu :", data)
@@ -58,4 +68,3 @@ def index():
 if __name__ == '__main__':
     threading.Thread(target=load_data_and_predict).start()
     socketio.run(app, debug=True)
-
