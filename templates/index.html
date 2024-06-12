@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +8,11 @@
 </head>
 <body>
     <h1>Prédiction SOC</h1>
-    <div id="prediction-value">La valeur prédite sera affichée ici</div>
-
     <!-- Importer Socket.IO -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
         // Connexion au serveur SocketIO
         const socket = io();
-
         // Écouter l'événement 'prediction' et mettre à jour la valeur prédite
         socket.on('prediction', function(data) {
             const socValue = data.SOC;
