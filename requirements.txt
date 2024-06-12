@@ -1,6 +1,7 @@
-flask==2.0.3
-flask-socketio==5.2.0
-pyrebase4==4.5.0
-numpy==1.21.2
-onnxruntime==1.10.0
+Flask>=2.0,<3.0
+Flask-SocketIO>=5.0,<6.0
+pyrebase4>=4.5,<5.0
+numpy>=1.19,<2.0
+onnxruntime>=1.10,<2.0
+tf2onnx>=1.13,<2.0
 
