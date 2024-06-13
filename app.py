@@ -26,8 +26,7 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
 # Load the TFLite model
-model_path = os.path.join(os.path.dirname(__file__), 'model_GRU_3', 'model_GRU_3.tflite')
-interpreter = tflite.Interpreter(model_path=model_path)
+interpreter = tflite.Interpreter(model_path='model_GRU_3.tflite')
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
