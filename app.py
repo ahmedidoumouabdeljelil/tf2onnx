@@ -14,10 +14,10 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET')
 socketio = SocketIO(app)
 
 firebaseConfig = {
-    "apiKey": "AIzaSyBjDArp_CvaEjvELFQWd_S1N7dSJW6Kz0o",
-    "authDomain": "data-5647b.firebaseapp.com",
-    "databaseURL": "https://data-5647b-default-rtdb.europe-west1.firebasedatabase.app",
-    "projectId": "data-5647b",
+    "apiKey": os.environ.get('API_Key'),
+    "authDomain": os.environ.get('Auth'),
+    "databaseURL": os.environ.get('Data_URL'),
+    "projectId": os.environ.get('ID'),
     "storageBucket": "data-5647b.appspot.com",
     "messagingSenderId": "1068830233307",
     "appId": "1:1068830233307:web:02a0f8d39e0cd6cb4b32fe",
