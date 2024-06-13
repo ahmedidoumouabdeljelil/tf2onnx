@@ -86,7 +86,6 @@ def get_data():
 @app.route('/')
 def index():
     return render_template('index.html')
-
 if __name__ == '__main__':
     threading.Thread(target=load_data_and_predict).start()
     socketio.run(app, debug=True)
