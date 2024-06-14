@@ -25,7 +25,7 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
 # Charger le modèle TensorFlow Lite
-interpreter = tflite.Interpreter(model_path="model_GRU_3_ras.tflite")
+interpreter = tflite.Interpreter(model_path="model_GRU_3_.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
